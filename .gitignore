@@ -1,0 +1,17 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+
+# Segredos: nunca versionar
+.env
+.env.*
+*.pem
+*.key
+
+# Ferramentas
+node_modules/
+.wrangler/
