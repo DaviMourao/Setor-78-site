@@ -25,6 +25,7 @@ public/            → tudo que vai para o ar (é esta pasta que se publica)
   _headers         → cabeçalhos de segurança do Cloudflare (CSP etc.)
   robots.txt       → libera o Google e aponta o sitemap
   sitemap.xml      → lista de páginas para o Google
+  google3f985a52f51f7999.html → verificação do Google Search Console (não apagar)
 docs/              → referências e decisões (não vai para o ar)
 SECURITY.md        → checklist de segurança
 CLAUDE.md          → este arquivo
