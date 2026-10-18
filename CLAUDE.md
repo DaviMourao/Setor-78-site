@@ -7,8 +7,7 @@ Instruções para o agente (Claude) que mantém este site. Leia este arquivo int
 - **Cliente:** Setor 78, corretora de seguros, planos de saúde e consórcios em Sete Lagoas/MG.
 - **Responsável técnico:** Davi (faz as alterações e colhe a opinião do dono da corretora).
 - **O que é:** landing page estática, sem backend, sem banco de dados, sem formulários. Todo contato vai para o WhatsApp.
-- **Hospedagem (hoje, 17/10/2026):** Cloudflare **Worker** em `setor78.davifmourao.workers.dev` (não é Pages).
-- **Hospedagem (destino):** Cloudflare **Pages** ligado a um repositório **privado** do GitHub (integração Git do Pages), projeto `setor78`, endereço `setor78.pages.dev`. Configuração: sem comando de build, diretório de saída `public`, branch de produção `main`. O Worker só é apagado depois que o Pages estiver no ar e conferido. Passo a passo em `docs/migracao-pages.md`.
+- **Hospedagem:** Cloudflare **Pages**, projeto `setor78`, endereço `setor78.pages.dev` (no ar desde 18/10/2026). Ligado ao repositório **privado** `DaviMourao/Setor-78-site` no GitHub: cada push na branch `main` publica sozinho. Configuração: sem comando de build, diretório de saída `public`. O antigo Worker (`setor78.davifmourao.workers.dev`) foi substituído e não deve mais ser usado. Histórico da migração em `docs/migracao-pages.md`.
 - **Sem `wrangler.jsonc`:** o Pages com integração Git não precisa dele; as configurações ficam no painel. Se um dia for criado, ele passa a mandar nas configurações do projeto (inclusive `pages_build_output_dir = "public"`).
 - **Domínio próprio:** no Registro.br, será comprado depois e ligado ao projeto Pages.
 - **Idioma:** todo o conteúdo do site e as respostas ao Davi em português do Brasil.
@@ -24,7 +23,8 @@ public/            → tudo que vai para o ar (é esta pasta que se publica)
   logo-simbolo.png → símbolo da logo (branco, fundo transparente) no topo e rodapé
   og-image.jpg     → imagem de compartilhamento (logo completa)
   _headers         → cabeçalhos de segurança do Cloudflare (CSP etc.)
-  robots.txt
+  robots.txt       → libera o Google e aponta o sitemap
+  sitemap.xml      → lista de páginas para o Google
 docs/              → referências e decisões (não vai para o ar)
 SECURITY.md        → checklist de segurança
 CLAUDE.md          → este arquivo
@@ -61,7 +61,7 @@ Baseadas em OWASP Cheat Sheet Series, Project CodeGuard e OWASP Top 10. Ver `SEC
    - todos os botões de WhatsApp apontam para o número correto;
    - checklist de `SECURITY.md` (seção "A cada alteração").
 4. Entregar a pasta `public/` (ou zip dela) e resumir em poucas linhas o que mudou e o que falta preencher.
-5. Depois da migração: cada commit na branch `main` do GitHub publica sozinho. Confira os cabeçalhos no endereço publicado (seção "Cabeçalhos HTTP" do `SECURITY.md`).
+5. Cada push na branch `main` do GitHub publica sozinho. Confira os cabeçalhos no endereço publicado (seção "Cabeçalhos HTTP" do `SECURITY.md`).
 
 ## Dados atuais
 
@@ -73,4 +73,5 @@ Baseadas em OWASP Cheat Sheet Series, Project CodeGuard e OWASP Top 10. Ver `SEC
 - Logo: `logo_dark.jpeg` e `logo_branca.jpeg` na raiz do projeto (texto da logo: "Seguros e planos de saúde")
 - Número de clientes e "anos de mercado": o dono prefere não citar; o site mostra só "Fundada em 2023".
 - E-mail e Instagram: a corretora ainda não tem (link do Instagram fica comentado no rodapé).
-- Pendentes: seguradoras parceiras, confirmar tipos de seguro oferecidos. Trocar a URL do `og:image` quando houver domínio próprio (ou se o Pages der outro endereço que não `setor78.pages.dev`).
+- Pendentes: seguradoras parceiras, confirmar tipos de seguro oferecidos. Quando houver domínio próprio, trocar `https://setor78.pages.dev` por ele em todo lugar: `index.html` (canonical, `og:url`, `og:image` e os dados estruturados do bloco de localização), `robots.txt` e `sitemap.xml`. Depois reenviar o sitemap no Google Search Console.
+- SEO: dados estruturados da empresa ficam em microdata (`itemprop`) no bloco de localização do `index.html`, e não em JSON-LD, para não ter `<script>` inline. Se mudar endereço, horário ou telefone, atualizar ali também e no Perfil da Empresa no Google (os dados devem ser idênticos).

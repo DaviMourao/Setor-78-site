@@ -4,13 +4,9 @@ Landing page da Setor 78 Corretora (seguros, planos de saúde e consórcios), Se
 
 ## Onde está publicado
 
-| | Hoje | Destino |
-|---|---|---|
-| Serviço | Cloudflare **Worker** | Cloudflare **Pages** |
-| Endereço | `setor78.davifmourao.workers.dev` | `setor78.pages.dev` |
-| Como atualiza | upload manual | automático a cada commit na branch `main` do GitHub (repositório privado) |
+Cloudflare **Pages**, projeto `setor78`: https://setor78.pages.dev
 
-Passo a passo da migração: [`docs/migracao-pages.md`](docs/migracao-pages.md). O Worker só deve ser apagado depois que o Pages estiver no ar e conferido.
+Repositório privado: `DaviMourao/Setor-78-site` (branch `main`). Cada push na `main` publica o site automaticamente. O antigo Worker (`setor78.davifmourao.workers.dev`) foi substituído; histórico em [`docs/migracao-pages.md`](docs/migracao-pages.md).
 
 ## Configuração do Pages
 
@@ -21,10 +17,16 @@ Passo a passo da migração: [`docs/migracao-pages.md`](docs/migracao-pages.md).
 
 Só o conteúdo de `public/` vai para o ar. `CLAUDE.md`, `SECURITY.md`, `README.md` e `docs/` ficam no repositório, mas não são publicados. Não há `wrangler.jsonc`: para este site ele não é necessário.
 
-## Atualizar o site (depois da migração)
+## Atualizar o site
 
-1. No GitHub, abra o repositório → **Add file → Upload files** e arraste os arquivos alterados (mantendo as pastas).
-2. Escreva uma descrição curta e clique em **Commit changes** na branch `main`.
+1. Copie os arquivos alterados para a pasta do projeto (a que tem o `.git`).
+2. No terminal do VS Code, nessa pasta:
+   ```
+   git add -A
+   git status
+   git commit -m "Descreva a alteração"
+   git push
+   ```
 3. Em 1 ou 2 minutos o Pages publica. Confira no celular: botões do WhatsApp, mapa, sem erros.
 
 ## Configurações rápidas
