@@ -22,6 +22,7 @@ public/            → tudo que vai para o ar (é esta pasta que se publica)
   favicon.png, apple-touch-icon.png → ícone da aba / celular (símbolo da logo)
   logo-simbolo.png → símbolo da logo (branco, fundo transparente) no topo e rodapé
   og-image.jpg     → imagem de compartilhamento (logo completa)
+  img/             → fotos do site (hero, seguros, saude, consorcio, atendimento); ver docs/fotos.md
   _headers         → cabeçalhos de segurança do Cloudflare (CSP etc.)
   robots.txt       → libera o Google e aponta o sitemap
   sitemap.xml      → lista de páginas para o Google
@@ -33,10 +34,17 @@ CLAUDE.md          → este arquivo
 
 ## Identidade visual (não alterar sem pedido)
 
-- Estilo Starlink: fundo preto, texto branco, títulos em caixa alta com espaçamento largo, linhas finas, botões retangulares.
-- Cor quente âmbar (`--warm`) **só em pontos estratégicos**: CTAs principais, destaques pontuais, brilho do horizonte e do consórcio.
+Atualizada em 18/10/2026 a pedido do Davi: o site não deve parecer cópia da Starlink e precisa mostrar pessoas.
+
+- Minimalista, fundo preto e texto branco, com fotos de pessoas em preto e branco (filtro `--photo-filter` em `styles.css`; troque para `none` se quiserem fotos coloridas).
+- Títulos em letra normal (não caixa alta), espaçamento justo. Só os rótulos pequenos (`.label`) e a logo continuam em caixa alta.
+- Botões e etiquetas arredondados (pílula); cartões e fotos com cantos suaves (`--radius`).
+- Topo dividido: texto à esquerda e foto de pessoas à direita (no celular, a foto fica em cima). Sem o "horizonte" e as estrelas do estilo antigo.
+- Logo abaixo do topo, faixa de credenciais (SUSEP, CNPJ, desde 2023) com explicação "O que é a SUSEP?" em `<details>` (sem JS) e link para a consulta oficial da SUSEP. Credenciais oficiais devem ficar sempre em destaque: é o diferencial frente a concorrentes que não as mostram.
+- Produtos em três cartões com foto. "Sobre nós" em fundo branco, com foto de pessoas.
+- Cor quente âmbar (`--warm`) **só em pontos estratégicos**: CTAs principais, números, destaques pontuais, brilho do consórcio.
 - O botão flutuante do WhatsApp permanece verde, por reconhecimento.
-- Seção "Sobre nós" em fundo branco, para contraste.
+- Fotos ficam em `public/img/` e são servidas pelo próprio site (nunca link direto para banco de imagens, para não abrir a CSP). Origem e licença de cada foto em `docs/fotos.md`. Foto de banco nunca pode ser apresentada como equipe, cliente ou escritório da Setor 78; enquanto for de banco, a foto do "Sobre nós" leva a legenda "Imagem ilustrativa".
 
 ## Regras de segurança (obrigatórias)
 
